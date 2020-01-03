@@ -90,8 +90,7 @@ public class extendReport implements IReporter{
     
     private void buildTestNodes(IResultMap tests, Status status) throws Exception {
         ExtentTest test;
-        MethodParameters mModel = new MethodParameters();
-        String TestData = mModel.getData();
+     
         if (tests.size() > 0) {
             for (ITestResult result : tests.getAllResults()) {
                 test = extent.createTest(result.getName());
