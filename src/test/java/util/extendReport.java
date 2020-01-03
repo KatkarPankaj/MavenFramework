@@ -122,7 +122,6 @@ public class extendReport implements IReporter{
 					//test.log(status, result.getThrowable().getMessage());
 					test.log(status, result.getName());
 					MethodType obj = new MethodType();
-					test.log(status, TestData);
 				
 			
 	String screenshotPath = TestListener.captureScreenShot(result, result.getName());
