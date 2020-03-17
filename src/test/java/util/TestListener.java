@@ -19,6 +19,7 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import actions.MethodType;
 import model.MethodParameters;
 import util.WebDriverClass;
 
@@ -31,15 +32,20 @@ public class TestListener implements ITestListener{
 	static String projectPath = System.getProperty("user.dir");
 
 	static String screenshotPath = projectPath +"\\Test_Report\\";
+	static String browserI=null;
 
 	public void onTestStart(ITestResult result) {
+		
 
 	}
 
 	public void onTestSuccess(ITestResult tr) {
 		try {
-			
+		
+
 			 captureScreenShot(tr,"pass");
+			;
+			
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -58,6 +64,8 @@ public class TestListener implements ITestListener{
 	}
 
 	public void onTestSkipped(ITestResult result) {
+		System.out.println("Your Test logs"+result.getMethod().getBeforeGroups());
+		System.out.println("Your Test logs"+result.getParameters().hashCode());
 		// TODO Auto-generated method stub
 
 	}
@@ -82,20 +90,20 @@ public class TestListener implements ITestListener{
 		String passfailMethod = result.getName();
 	
 		passfailMethod = passfailMethod;
-	
+		browserI = result.getTestContext().getCurrentXmlTest().getParameter("browser01");
 		File scrFile = ((TakesScreenshot) WebDriverClass.driver).getScreenshotAs(OutputType.FILE);
-    	String destFile = passfailMethod + ".png";
+    	String destFile = passfailMethod + browserI+".png";
     	
     	
     	if(status.equalsIgnoreCase("fail")){
     		
     	 destDir = screenshotPath+"\\fail\\";
-       	 FileUtils.copyFile(scrFile, new File(destDir+passfailMethod+".png"));
+   FileUtils.copyFile(scrFile, new File(destDir+destFile));
 System.out.println("******ScreenShot is captured to***"+destDir);    	}
 
     	else if (status.equalsIgnoreCase("pass")){
     		destDir = screenshotPath+"\\pass\\";
-        	 FileUtils.copyFile(scrFile, new File(destDir+passfailMethod+".png"));
+   	 FileUtils.copyFile(scrFile, new File(destDir+destFile));
         	 System.out.println("******ScreenShot is captured to***"+destDir);  
     	}
     	

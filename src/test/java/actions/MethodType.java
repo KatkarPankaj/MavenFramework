@@ -38,6 +38,7 @@ import org.testng.asserts.SoftAssert;
 
 import util.ReadElementLocators;
 import util.WebDriverClass;
+import util.extendReport;
 
 public class MethodType {
 	
@@ -71,7 +72,7 @@ public class MethodType {
 		System.out.println("methodType= " + methodType + "objectLocators="
 						+ objectLocators + "actionType=" + actionType
 						+ "data= " + data);
-
+extendReport ss = new extendReport();
 		switch (methodType) {
 		
 		case "ID":
@@ -112,6 +113,7 @@ public class MethodType {
 				System.out.println(actsplit[0]);
 			}
 			findMethod(methodType, objectLocators, actionType, data, mModel);
+			System.out.println(methodType+objectLocators+actionType+data);
 			break;
 		}
 

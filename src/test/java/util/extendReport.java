@@ -32,7 +32,7 @@ import model.MethodParameters;
 public class extendReport implements IReporter{
 	static String projectPath = System.getProperty("user.dir");
     private static final String OUTPUT_FOLDER = projectPath+"\\Test_Report\\";
-    private static final String FILE_NAME = "Eextent_Test_Report.html";
+    private static final String FILE_NAME = "Extent_Test_Report.html";
     
     private ExtentReports extent;
     String methodName = null;
@@ -45,6 +45,7 @@ public class extendReport implements IReporter{
             
             for (ISuiteResult r : result.values()) {
                 ITestContext context = r.getTestContext();
+                
                 
                 try {
 					buildTestNodes(context.getFailedTests(), Status.FAIL);
@@ -90,10 +91,12 @@ public class extendReport implements IReporter{
     
     private void buildTestNodes(IResultMap tests, Status status) throws Exception {
         ExtentTest test;
-     
         if (tests.size() > 0) {
             for (ITestResult result : tests.getAllResults()) {
-                test = extent.createTest(result.getName());
+            	String browseri = result.getTestContext().getCurrentXmlTest().getParameter("browser01");
+            	String TestData01 = result.getTestContext().getCurrentXmlTest().getParameter("TestData");
+            	System.out.println("YOUR TEST DATA IS:"+TestData01);
+                test = extent.createTest(result.getName()+" "+"Browser:"+browseri);
                 System.out.println("Get Method Name------"+result.getMethod().getMethodName());
                 System.out.println("Get Name------"+result.getName());
                 System.out.println("Get TestName------"+result.getTestName());
@@ -102,13 +105,13 @@ public class extendReport implements IReporter{
 
                 if (result.getStatus() == ITestResult.FAILURE) {
                 	test.log(status,
-							result.getName()+ " got " + status.toString().toLowerCase() + "ed");
+							result.getName()+" "+"On Browser:"+browseri+ " got " +" "+ status.toString().toLowerCase() + "ed");
 					test.log(status, result.getThrowable().getMessage());
 					test.log(status, result.getThrowable().getStackTrace().toString());
 					test.log(status, result.getParameters().toString());
-
+					test.info(browseri);
+					test.info(browseri);
 					String screenshotPath = TestListener.captureScreenShot(result, result.getName());
-					
 					MediaEntityModelProvider mediaModel = MediaEntityBuilder
 							.createScreenCaptureFromPath("../Test_Report/fail/" + screenshotPath).build();
 
@@ -117,12 +120,13 @@ public class extendReport implements IReporter{
 
 				} else if (result.isSuccess()) {
 					test.log(status,
-							result.getName() + " got " + status.toString().toLowerCase() + "ed");
-					test.log(status, result.getTestName());
+							result.getName()+" "+"On Browser:"+browseri+ " got " +" "+ status.toString().toLowerCase() + "ed");
+					test.log(status, result.getTestName()+" "+"Browser:"+browseri);
 					//test.log(status, result.getThrowable().getMessage());
 					test.log(status, result.getName());
 					MethodType obj = new MethodType();
-				
+					test.info(browseri);
+					test.info(browseri);
 			
 	String screenshotPath = TestListener.captureScreenShot(result, result.getName());
 					
@@ -135,6 +139,8 @@ public class extendReport implements IReporter{
                 
                 test.getModel().setStartTime(getTime(result.getStartMillis()));
                 test.getModel().setEndTime(getTime(result.getEndMillis()));
+                test.getModel().setDescription("Description:- This test was executed on Browser:-"+" "+browseri);
+            
               
             }
         }

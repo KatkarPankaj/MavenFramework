@@ -240,7 +240,10 @@ public class ExcelAction {
 									1, suiteName.trim(), testSuiteFilePath);
 
 							if (("YES").equalsIgnoreCase(testCaseState)) {
-								listOfTestCases.add(testCaseName);
+								if(!listOfTestCases.contains(listOfTestCases))
+								{
+									listOfTestCases.add(testCaseName);
+								}
 							}
 							temp1.put(testCaseName, testCaseState);
 
