@@ -2,9 +2,8 @@ package model;
 /**
  * The TestCase class is used as a bean class to get the details of each test case
  *
- * @author Shilpashree_V
+ * @author Pankaj Katkar
  * @version 1.0
- * @since February 2015
  * 
  */
 import java.util.ArrayList;
