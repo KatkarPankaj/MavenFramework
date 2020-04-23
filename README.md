@@ -1,4 +1,4 @@
-# MavenFramework
+# Sample maven framework- with excel and Extent reports implemented
 Sample maven framework- with excel 
 Steps to get started: Example file and tests are already provided in the project.
 
