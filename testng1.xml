@@ -6,14 +6,14 @@
   <listener class-name ="util.TestListener"/>
   </listeners>
     <test name="ChromeTest">
-    <parameter name="browser01" value="Firefox" /> 
+    <parameter name="browser01" value="Chrome" /> 
 		<classes>
 			<class name="util.ExecuteTestCases" />
 	
 		</classes>
 		</test>
 	 <test name="FirefoxTest">
-    <parameter name="browser01" value="Chrome" /> 
+    <parameter name="browser01" value="Firefox" /> 
 		<classes>
 			<class name="util.ExecuteTestCases" />
 	
